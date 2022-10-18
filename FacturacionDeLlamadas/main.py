@@ -37,6 +37,10 @@ class FacturacionDeLlamadasUnitTests(unittest.TestCase):
     def test_calcular_consumo_de_llamadas_en_una_lista(self):
         sut = ConsumoPorLlamadas([(0, 0), (3, 30)])
         self.assertEqual(630, sut.obtenerTotal())
+    
+    def test_calcular_consumo_de_llamadas_mayores_a_5_minutos_correctamente(self):
+        sut = ConsumoPorLlamadas([(6, 0), (6, 30)])
+        self.assertEqual(1950, sut.obtenerTotal())
 
 if __name__ == "__main__":
     unittest.main()
