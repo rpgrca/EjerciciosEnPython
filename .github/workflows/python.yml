@@ -37,4 +37,13 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest FacturacionDeLlamadas/tests.py --doctest-modules --junitxml=junit/facturacion-results.xml --cov=FacturacionDeLlamadas/facturacion --cov-report=xml --cov-branch --cov-report=html
+        pytest FacturacionDeLlamadas/tests.py --doctest-modules --junitxml=facturacion.coverage.xml --cov=facturacion --cov-report=xml --cov-branch --cov-report=html
+
+    - name: Upload coverage to CodeCov
+      run: bash <(curl -s https://codecov.io/bash)
+
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: ./*.coverage.xml
